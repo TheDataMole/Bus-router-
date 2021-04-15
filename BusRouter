@@ -3,7 +3,25 @@ BusRouter()
 
     shortestPathBetweenTwoStops(String userInputStopName1, String userInputStopName2);
     getStopInformationTST(String userInputStopName);
-    getAllStopsInfoUsingArrivalTime(String hhmmss);
+    
+    
+    getAllStopsInfoUsingArrivalTime(String hhmmss)
+	{
+		try
+		{
+			File stoptimesFile = new File("stop_times.txt");
+			Scanner input = new Scanner(stoptimesFile);
+		}catch(Exception e)
+		{
+			System.out.print("file not found");
+		}
+    
+  }
+  
+  
+  
+  
+  
     //use above methods to build interface and error checking
     
     
