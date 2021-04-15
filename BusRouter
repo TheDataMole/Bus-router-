@@ -3,7 +3,7 @@ BusRouter()
 
     shortestPathBetweenTwoStops(String userInputStopName1, String userInputStopName2);
     getStopInformationTST(String userInputStopName);
-    getAllStopsInfoUsingArrivalTime(String hh:mm:ss);
+    getAllStopsInfoUsingArrivalTime(String hhmmss);
     //use above methods to build interface and error checking
     
     
