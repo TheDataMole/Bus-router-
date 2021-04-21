@@ -1,0 +1,54 @@
+
+public class BusInfo {
+
+	public Integer trip_id;
+	public String arrival_time;
+	public String departure_time;
+	public int stop_id;
+	public int stop_sequence;
+	public String stop_headsign;
+	public int pickup_type;
+	public int dropoff_type;
+	public double shape_dist_travelled;
+	
+	public String stop_code;
+	public String stop_name;
+	public String stop_desc;
+	public String stop_lat;
+	public String stop_lon;
+	public String zone_id;
+	public String stop_url;
+	public String location_type;
+	public String parent_station;
+	
+	
+	
+	
+	public void outputInfo()
+	{
+		System.out.println("Trip ID                  || " + trip_id);
+		System.out.println("Arrival Time             || " + arrival_time);
+		System.out.println("Departure Time           || " + departure_time);
+		System.out.println("Stop ID                  || " + stop_id);
+		System.out.println("Stop Sequence            || " + stop_sequence);
+		System.out.println("Stop Headsign            || " + stop_headsign);
+		System.out.println("Pickup Type              || " + pickup_type);
+		System.out.println("Dropoff Type             || " + dropoff_type);
+		System.out.println("Shape Distance Travelled || " + shape_dist_travelled);
+		
+		System.out.println("Stop Code                || " + stop_code);
+		System.out.println("Stop Name                || " + stop_name);
+		System.out.println("Stop Desc                || " + stop_desc);
+		System.out.println("Stop Latitude            || " + stop_lat);
+		System.out.println("Stop Longitude           || " + stop_lon);
+		System.out.println("Zone ID                  || " + zone_id);
+		System.out.println("Stop URL                 || " + stop_url);
+		System.out.println("Location Type            || " + location_type);
+		System.out.println("Parent Station           || " + parent_station+ "\n");
+	}
+	
+	public Integer getTrip_ID()
+	{
+		return this.trip_id;
+	}
+}

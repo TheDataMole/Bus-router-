@@ -1,0 +1,12 @@
+import java.util.Comparator;
+
+public class myCustomTripIDComparator implements Comparator<BusInfo>{
+
+	@Override
+	public int compare(BusInfo arg0, BusInfo arg1) {
+		// TODO Auto-generated method stub
+		return arg0.getTrip_ID().compareTo(arg1.getTrip_ID());
+	}
+	
+
+}
