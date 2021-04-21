@@ -1,12 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class BusRouter{
 	
 	File stopTimesFile;
+	File stopsFile;
 
 	
 	void getAllStopsInfoUsingArrivalTime(String hhmmss) throws FileNotFoundException
@@ -33,21 +34,23 @@ public class BusRouter{
 			
 		}catch(Exception e)
 		{
-			System.out.print("file not found");
+			System.out.print("file not found: stop_times.txt");
 		}
 		
 		//
-		// create Hashtable arrival times to Bus ID 
+		// create LinkedMap using arrivalTimesAsKey and busInfo as object
 		//
 		
 		Scanner input = new Scanner(this.stopTimesFile);
-		LinkedMap<String, Integer> arrivalsID = new LinkedMap<String, Integer>();
+		LinkedMap<String, Integer> arrivalsTripID = new LinkedMap<String, Integer>();
+		LinkedMap<String, BusInfo> busInfo = new LinkedMap<String, BusInfo>();
 		 input.nextLine();
 		while(input.hasNextLine())
 		{
-		  String[] line = input.nextLine().split(",");	
-		  String busIDString = line[0];
-		  int busID = Integer.parseInt(busIDString);
+		  String lineIn = input.nextLine();	
+		  String[] line = lineIn.split(",");
+		  String tripIDString = line[0];
+		  int tripID = Integer.parseInt(tripIDString);
 		  
 		  String arrivalTimeString = line[1];
 		  String[] arrivalTimeFormattedArray = arrivalTimeString.split(":");
@@ -68,23 +71,82 @@ public class BusRouter{
 				  && Integer.parseInt(arrivalTimeFormattedArray[0]) < 24 && Integer.parseInt(arrivalTimeFormattedArray[2]) >= 0 && Integer.parseInt(arrivalTimeFormattedArray[2]) < 60)
 		  {
 			  String key = arrivalTimeFormattedArray[0]+ arrivalTimeFormattedArray[1]+arrivalTimeFormattedArray[2];
-			  arrivalsID.put(key, busID);
+			  arrivalsTripID.put(key, tripID);
+			  BusInfo toAdd = new BusInfo();
+			  toAdd.trip_id = tripID;
+			  toAdd.arrival_time = line[1];
+			  toAdd.departure_time = line[2];
+			  toAdd.stop_id = Integer.parseInt(line[3]);
+			  toAdd.stop_sequence = Integer.parseInt(line[4]);
+			  toAdd.stop_headsign = line[5];
+			  toAdd.pickup_type = Integer.parseInt(line[6]);
+			  toAdd.dropoff_type = Integer.parseInt(line[7]);
+			  
+			  if(line.length == 7)
+			  {
+				  toAdd.shape_dist_travelled = Double.parseDouble(line[8]);
+			  }else
+			  {
+				  toAdd.shape_dist_travelled = 0.0;
+			  }
+			 
+			  busInfo.put(key,toAdd);
+			  
 			  
 		  }
 		}
 		
-		Object[] BusIDObjectArraySorted;
-		if(arrivalsID.containsKey(inputTimeSearch))
-		{
-			 BusIDObjectArraySorted = arrivalsID.valuesToSortedArray(inputTimeSearch);
+		Comparator<BusInfo> customComparator = new myCustomTripIDComparator();
+		BusInfo[] tripIDObjectArraySorted = null;
+		if(busInfo.containsKey(inputTimeSearch))
+		{	
+			tripIDObjectArraySorted = Arrays.copyOf(busInfo.valuesToArray(inputTimeSearch), busInfo.valuesToArray(inputTimeSearch).length, BusInfo[].class);
+			 Arrays.sort(tripIDObjectArraySorted, customComparator);
 		}
+	
+	
+		try
+		   {
+				File stopsFile = new File("stops.txt");
+				this.stopsFile = stopsFile;
+				
+			}catch(Exception e)
+			{
+				System.out.print("file not found: stops.txt");
+			}
+			
+			Scanner inputStops = new Scanner(this.stopsFile);
+			inputStops.nextLine();
+			while(inputStops.hasNextLine())
+			{
+				String stopsLine = inputStops.nextLine();
+				String[] stopsLineParsed = stopsLine.split(",",-1);
+				for(int c = 0; c<tripIDObjectArraySorted.length; c++)
+				{
+					if(tripIDObjectArraySorted[c].stop_id == Integer.parseInt(stopsLineParsed[0]))
+					{
+						tripIDObjectArraySorted[c].stop_code = stopsLineParsed[1];
+						tripIDObjectArraySorted[c].stop_name = stopsLineParsed[2];
+						tripIDObjectArraySorted[c].stop_desc = stopsLineParsed[3];
+						tripIDObjectArraySorted[c].stop_lat = stopsLineParsed[4];
+						tripIDObjectArraySorted[c].stop_lon = stopsLineParsed[5];
+						tripIDObjectArraySorted[c].zone_id = stopsLineParsed[6];
+						tripIDObjectArraySorted[c].stop_url = stopsLineParsed[7];
+						tripIDObjectArraySorted[c].location_type = stopsLineParsed[8];
+						tripIDObjectArraySorted[c].parent_station = stopsLineParsed[9];
+					}
+				}
+				
+			}
 		
+			for(int i = 0; i< tripIDObjectArraySorted.length; i++)
+			{
+				tripIDObjectArraySorted[i].outputInfo();
+			}
+				 
 		
+	}	
 		
-		 
-		
-	}
-		
-		
-}
+  }
+	
 }
