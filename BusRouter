@@ -11,6 +11,7 @@ public class BusRouter{
 
 	
 	searchStopInformationByName(String userInput)
+	ShortestPathAlgorithm(String Stop1, String stop2)
 	
 	void getAllStopsInfoUsingArrivalTime(String hhmmss) throws FileNotFoundException
 	{ 
