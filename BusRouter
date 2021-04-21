@@ -8,8 +8,6 @@ public class BusRouter{
 	
 	File stopTimesFile;
 
-	 shortestPathBetweenTwoStops(String userInputStopName1, String userInputStopName2);
-	 getStopInformationTST(String userInputStopName);
 	
 	void getAllStopsInfoUsingArrivalTime(String hhmmss) throws FileNotFoundException
 	{ 
@@ -75,12 +73,12 @@ public class BusRouter{
 		  }
 		}
 		
-		Object[] BusIDObjectArray;
+		Object[] BusIDObjectArraySorted;
 		if(arrivalsID.containsKey(inputTimeSearch))
 		{
-			 BusIDObjectArray = arrivalsID.valuesToArray(inputTimeSearch);
-			 System.out.print(Arrays.toString(BusIDObjectArray));
+			 BusIDObjectArraySorted = arrivalsID.valuesToSortedArray(inputTimeSearch);
 		}
+		
 		
 		
 		 
