@@ -10,6 +10,8 @@ public class BusRouter{
 	File stopsFile;
 
 	
+	searchStopInformationByName(String userInput)
+	
 	void getAllStopsInfoUsingArrivalTime(String hhmmss) throws FileNotFoundException
 	{ 
 		
