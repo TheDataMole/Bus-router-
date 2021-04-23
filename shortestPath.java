@@ -7,14 +7,14 @@ import java.util.Scanner;
 public class shortestPath {
 	
 	int stop_id;
-	int adjMatrix[][] = new int[3][3];
+	static int adjMatrix[][] = new int[10000][10000];
 	double distance[];
-	String stop_times;
+	String stopTimes;
 	String transfers;
 
-	shortestPath(String stop_times, String transfers){
+	shortestPath(String stopTimes, String transfers){
 		try {
-			readFile(stop_times, transfers);
+			readFile(stopTimes, transfers);
 		} catch (FileNotFoundException e) {
 			
 			e.printStackTrace();
@@ -24,19 +24,36 @@ public class shortestPath {
 	}
 
 	void createMap(){
+
+		for(int i = 0 ; i < adjMatrix.length; i ++){
+			for(int j = 0; j < adjMatrix[i].length; j++){
+				if(i == j){
+					adjMatrix[i][j] = 0;
+				}
+				else{
+					adjMatrix[i][j] = -1;
+				}
+			}
+		}
+
+		
 		
 	}
 
 	
-	void readFile(String file, String file1) throws FileNotFoundException  {
+	static void readFile(String stopTimes, String transfers) throws FileNotFoundException  {
 
-		int departureStop;
-		int arrivalStop;
+		int departureStop = 0;
+		int arrivalStop = 0;
 		int tripId = 0;
 		int previousTripId = 0;
 		int weight = 1;
-		File stopTimes = new File (stop_times);
-		Scanner scanner = new Scanner(stopTimes);
+		int travelType;
+		int minTravelTime;
+		
+
+		File stop_times = new File (stopTimes);
+		Scanner scanner = new Scanner(stop_times);
 		scanner.nextLine();
 		String line;
 
@@ -44,55 +61,137 @@ public class shortestPath {
 			line = scanner.nextLine();
 			Scanner currentLine = new Scanner(line);
 			currentLine.useDelimiter(",");
+			departureStop = arrivalStop;
 
 			tripId = currentLine.nextInt();
-			arrivalStop = currentLine.nextInt();
+			currentLine.next();
+			currentLine.next();
 
+			
+			arrivalStop = currentLine.nextInt();
 			if(previousTripId == tripId){
 				adjMatrix[departureStop][arrivalStop] = weight;
 			}
 
-
+			currentLine.close();
 
 		}
+		scanner.close();
 		
-		if (!scanner.hasNextInt()) {
-			return;
+		File transferData = new File(transfers);
+		scanner = new Scanner(transferData);
+		scanner.nextLine();
+
+		while(scanner.hasNextLine()){
+			line = scanner.nextLine();
+			Scanner currentLine = new Scanner(line);
+			currentLine.useDelimiter(",");
+			departureStop = arrivalStop;
+
+			departureStop = currentLine.nextInt();
+			arrivalStop = currentLine.nextInt();
+			travelType = currentLine.nextInt();
+
+			if(travelType == 0){
+				adjMatrix[departureStop][arrivalStop] = 2;
+
+			}
+			else if(travelType == 2){
+				minTravelTime = currentLine.nextInt();
+				adjMatrix[departureStop][arrivalStop] = minTravelTime/100;
+				///adjMatrix[departureStop][arrivalStop] = (minTravelTime/100); error when converting??
+			}
+
+
+			currentLine.close();
+
 		}
-		
+		scanner.close();
+
+		findShortestPath(departureStop, arrivalStop);
 		
 		
 	}
 
 	public static void main(String[] args) {
 		shortestPath map = new shortestPath("stop_times.txt", "transfers.txt");
+		map.createMap();
+		try{
+			readFile("stop_times.txt", "transfers.txt");
+		} catch(FileNotFoundException e){
+			e.printStackTrace();
+		}
+		
+
+
+	}
+
+	//using dijkstra
+	public static double findShortestPath(int departureStop, int arrivalStop){
+
+		int visited[] = new int[adjMatrix.length];
+		int currentStop;
+		int numStopsVisited;
+		double distance[] = new double[adjMatrix.length];
+		int edge[] = new int[adjMatrix.length];
+
+		visited[departureStop] = 1;
+		distance[departureStop] = 0;
+		currentStop = departureStop;
+		numStopsVisited = 0;
+
+		while(numStopsVisited < distance.length){
+
+			//mark stop as visited and relax edges from the stop
+			for(int i = 0; i < adjMatrix[currentStop].length; i ++){
+				if (visited[i] == 0){
+					relaxEdges(currentStop, i, distance, edge);
+
+
+				}
+				
+			}
+			visited[currentStop] = 1;
+
+			//find next stop with shortest distnace that has not been visited yet
+			double shortestDistance = Integer.MAX_VALUE;
+			for(int j = 0; j < distance.length; j++){
+				if(visited[j] != 1 && shortestDistance > distance[j]){
+
+					currentStop = j;
+					shortestDistance = distance[j];
+				}
+			}
+			numStopsVisited++;
+
+		}
+		printRoute(departureStop, arrivalStop, distance, edge);
+		return distance[arrivalStop];
+		
+		
+
+	}
+
+	public static void printRoute(int departureStop, int arrivalStop, double[] distance, int[] edge){
+
+		String route = " ";
+		while(departureStop != arrivalStop){
+			route = "---" + edge[arrivalStop] + route;
+			arrivalStop = edge[arrivalStop];
+
+		}
+		route = route + "---" + arrivalStop;
+		System.out.println(distance[arrivalStop] + "via" + route);
+		
+
+	}
+
+	//code from Ivana's slides to relax edges from a node/stop
+	private static void relaxEdges(int departureStop, int arrivalStop, double[] distance, int[] edge){
+		if (distance[arrivalStop] > distance[departureStop] + adjMatrix[departureStop][arrivalStop]){
+			distance[arrivalStop] = distance[departureStop] + adjMatrix[departureStop][arrivalStop];
+			edge[arrivalStop] = departureStop;
+		}
 	}
 }
-/*
- class Edge{
-	public int u, v;
-    public double length;
-    public Edge(int u, int v, double length) {
-    	this.u = u;
-    	this.v = v;
-    	this.length = length;
-    }
-}
-    
-class Stop implements Comparable<Stop>{
-    public int u;
-    public double time;
-    public Stop(int u, double time) {
-         this.u = u;
-         this.time = time;
-    }
-    public int compareTo(Stop stop) {
-         if (time < stop.time) {
-              return -1; 
-          }
-          if (time > stop.time) {
-              return 1; 
-          }
-          return 0; 
-    }
-}*/
+
