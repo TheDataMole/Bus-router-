@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,11 +27,10 @@ public class LinkedMap<S,I> {
 	        return M.containsKey(key);
 	    }
 	 
-	 public Object[] valuesToSortedArray(S key)
+	 public Object[] valuesToArray(S key)
 	 {
 		 Collection<I> collectionOfValues = this.get(key);
 		 Object[] valuesArray = collectionOfValues.toArray(new Object[0]);
-		 Arrays.sort(valuesArray);
 		 return valuesArray;
 	 }
 }
