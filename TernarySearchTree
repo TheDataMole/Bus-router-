@@ -59,11 +59,11 @@ public class TernarySearchTree {
 				}
 				else if (this.mid != null)
 				{
-					return mid.add(key.substring(1),   );
+					return mid.add(key.substring(1), value);
 				}
 				else 
 				{
-					this.mid = new Node(key.substring(1),   );
+					this.mid = new Node(key.substring(1), value);
 					return mid.search(key.substring(1));
 				}
 			}
@@ -136,7 +136,7 @@ public class TernarySearchTree {
       if (node != null) {
         returnListOfStops(node.left, string, sb, key);
         string = string + node.outputInfo;
-        if (node.containsStop) sb.append(word + string.substring(1) + "\n");
+        if (node.containsStop) sb.append(key + string.substring(1) + "\n");
         returnListOfStops(node.mid, string, sb, key);
         string = string.substring(0, string.length() - 1);
         returnListOfStops(node.right, string, sb, key);
@@ -160,15 +160,13 @@ public class TernarySearchTree {
       stopsAsLines[count] = readStops.nextLine();
       count++;
     }
-    String splitLine[];
-    String splitStopName[];
     for (int i = 0; i < stopsAsLines.length; i++) {
-      splitLine = stopsAsLines[i].split("," -1);
+      String splitLine[] = stopsAsLines[i].split("," -1);
       //this next bit checks if the first word of the stop name is one of a few, and moves it to the end if need be
       stopName = splitLine[1];
       stopFirstWord = splitStopName[0];
-      splitStopName = stopName.split(" ", -1);
-      if (String.equals(stopFirstWord[0], "FLAGSTOP") || String.equals(stopFirstWord[0], "WB") || String.equals(stopFirstWord[0], "NB") || String.equals(stopFirstWord[0], "SB") || String.equals(stopFirstWord[0], "EB")) {
+      String splitStopName[] = stopName.split(" ", -1);
+      if (stopFirstWord[0].equals("FLAGSTOP") || (stopFirstWord[0].equals("WB") || (stopFirstWord[0].equals("NB") || (stopFirstWord[0].equals("SB") || (stopFirstWord[0].equals("EB")) {
         int wordIndex = stopName.indexOf(" ") + 1;
         String newName = stopName.substring(wordIndex);
         splitLine[1] = newName + " " + stopFirstWord;
