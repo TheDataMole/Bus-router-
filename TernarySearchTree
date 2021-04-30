@@ -46,16 +46,13 @@ public class TernarySearchTree {
 		
 		private Node add(String key, StopInfo value)
 		{
-			if (root == null) {
-				root = new Node(key, value);
-				return root;
-			}
-      
 			Character c = key.charAt(0);
 			if ((this.character).equals(c) == true) {
 				if (key.length() == 1) {
 					this.value = value;
 					this.containsStop = true;
+					size++;
+					return this;
 				}
 				else if (this.mid != null)
 				{
@@ -77,21 +74,20 @@ public class TernarySearchTree {
 				else 
 				{
 					left = new Node(key, value);
+					size++;
 					return left.search(key);
 				}
 			} 
-			else 
+			if (this.right != null) return right.add(key, value);
+			else
 			{
-				if (this.right != null) return right.add(key, value);
-				else
-				{
-					right = new Node(key, value);
-					return right.search(key);
-				}
+				right = new Node(key, value);
+				size++;
+				return right.search(key);
 			}
 	    }
 		
-    	public Node search(String key) {
+    	private Node search(String key) {
 		if (key.isEmpty()) return null;
 			Character c = key.charAt(0);
 		if (c.equals(this.character)) {
@@ -110,7 +106,7 @@ public class TernarySearchTree {
 
     //Use this one for finding stops with just the start
     //of words
-    public String searchStops(String key) {
+    private String searchStops(String key) {
       StringBuilder builder = new StringBuilder();
       Node searchKeyRoot = searchToEndOfKey(root, key, 0);
       returnListOfStops(searchKeyRoot, "", builder, key);
@@ -173,4 +169,23 @@ public class TernarySearchTree {
     }
     readStops.close();
   }
+  
+  //creation of the trie
+    public TernarySearchTree() {
+      this.size = 0;
+      this.root = null;
+    }
+     
+    public void add(String key, StopInfo value) {
+        if (root == null) {
+		    root = new Node(key, value);
+            size = 1;
+		} else {
+		    root.add(key, value);
+		}
+    }
+    
+    public String search(String key) {
+        return searchStops(key);
+    }
 }
