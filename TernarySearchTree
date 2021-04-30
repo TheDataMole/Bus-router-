@@ -13,12 +13,11 @@ public class TernarySearchTree {
 	
 	void File()
 	{
-		 try {
+	    try {
 				File stopsFile = new File("stops.txt");
 				this.stopsFile = stopsFile;
-	      }
-	  catch(Exception e) {
-				System.out.print("file not found: stops.txt");
+	    } catch(Exception e) {
+				System.out.print("File not found: stops.txt");
 		}
 	}
 	
@@ -156,16 +155,16 @@ public class TernarySearchTree {
     for (int i = 0; i < stopsAsLines.length; i++) {
       String splitLine[] = stopsAsLines[i].split(",", -1);
       //this next bit checks if the first word of the stop name is one of a few, and moves it to the end if need be
-      stopName = splitLine[1];
+      stopName = splitLine[2];
       String splitStopName[] = stopName.split(" ", -1);
       stopFirstWord = splitStopName[0];
       if ((stopFirstWord.equals("FLAGSTOP")) || (stopFirstWord.equals("WB")) || (stopFirstWord.equals("NB")) || (stopFirstWord.equals("SB")) || (stopFirstWord.equals("EB"))) {
         int wordIndex = stopName.indexOf(" ") + 1;
         String newName = stopName.substring(wordIndex);
-        splitLine[1] = newName + " " + stopFirstWord;
+        splitLine[2] = newName + " " + stopFirstWord;
       }
       //assign values to StopInfo object
-      stops[i].setInfo(splitLine[0], splitLine[1], splitLine[2], splitLine[3], splitLine[4], splitLine[5], splitLine[6], splitLine[7], splitLine[8]);
+      stops[i].setInfo(splitLine[0], splitLine[1], splitLine[2], splitLine[3], splitLine[4], splitLine[5], splitLine[6], splitLine[7], splitLine[8], splitLine[9]);
     }
     readStops.close();
     return stops;
@@ -176,11 +175,12 @@ public class TernarySearchTree {
         this.size = 0;
         this.root = null;
         StopInfo stops[] = null;
-    
+        
+        File();
         try {
             stops = readStopsInfoFileIntoArray();
         } catch(Exception e) {
-			System.out.print("file not found: stops.txt");
+			System.out.println("File not found: stops.txt.");
         }
         
         for (StopInfo stop : stops) {
@@ -198,6 +198,6 @@ public class TernarySearchTree {
     }
     
     public String search(String key) {
-        return searchStops(key);
+        return searchStops(key.toUpperCase());
     }
 }
