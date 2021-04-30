@@ -45,7 +45,6 @@ public class BusRouter{
 		//
 		
 		Scanner input = new Scanner(this.stopTimesFile);
-		LinkedMap<String, Integer> arrivalsTripID = new LinkedMap<String, Integer>();
 		LinkedMap<String, BusInfo> busInfo = new LinkedMap<String, BusInfo>();
 		 input.nextLine();
 		while(input.hasNextLine())
@@ -54,7 +53,6 @@ public class BusRouter{
 		  String[] line = lineIn.split(",");
 		  String tripIDString = line[0];
 		  int tripID = Integer.parseInt(tripIDString);
-		  
 		  String arrivalTimeString = line[1];
 		  String[] arrivalTimeFormattedArray = arrivalTimeString.split(":");
 		  
@@ -74,7 +72,6 @@ public class BusRouter{
 				  && Integer.parseInt(arrivalTimeFormattedArray[0]) < 24 && Integer.parseInt(arrivalTimeFormattedArray[2]) >= 0 && Integer.parseInt(arrivalTimeFormattedArray[2]) < 60)
 		  {
 			  String key = arrivalTimeFormattedArray[0]+ arrivalTimeFormattedArray[1]+arrivalTimeFormattedArray[2];
-			  arrivalsTripID.put(key, tripID);
 			  BusInfo toAdd = new BusInfo();
 			  toAdd.trip_id = tripID;
 			  toAdd.arrival_time = line[1];
@@ -124,7 +121,7 @@ public class BusRouter{
 			{
 				String stopsLine = inputStops.nextLine();
 				String[] stopsLineParsed = stopsLine.split(",",-1);
-				for(int c = 0; c<tripIDObjectArraySorted.length; c++)
+				for(int c = 0; c < tripIDObjectArraySorted.length; c++)
 				{
 					if(tripIDObjectArraySorted[c].stop_id == Integer.parseInt(stopsLineParsed[0]))
 					{
