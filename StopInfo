@@ -1,38 +1,53 @@
 public class StopInfo {
+
 	public String stop_code;
 	public String stop_name;
+
 	public String stop_desc;
+
 	public String stop_lat;
+
 	public String stop_lon;
+
 	public String zone_id;
+
 	public String stop_url;
+
 	public String location_type;
+
 	public String parent_station;
 	
-  public void setInfo(String a, String b, String c, String d, String e, String f, String g, String h, String i) {
-    stop_code = a;
-    stop_name = b;
-    stop_desc = c;
-    stop_lat = d;
-    stop_lon = e;
-    zone_id = f;
-    stop_url = g;
-    location_type = h;
-    parent_station = i;
-  }
+ 
+	
+	public void setInfo(String a, String b, String c, String d, String e, String f, String g, String h, String i) {
+   
+		stop_code = a;
+   
+		stop_name = b;
 
-	public String outputInfo()
-	{
-		return "Stop Code      || " + stop_code 
-    "\n" + "Stop Name      || " + stop_name +
-    "\n" + "Stop Desc      || " + stop_desc +
-    "\n" + "Stop Latitude  || " + stop_lat +
-    "\n" + "Stop Longitude || " + stop_lon +
-    "\n" + "Zone ID        || " + zone_id +
-    "\n" + "Stop URL       || " + stop_url + 
-    "\n" + "Location Type  || " + location_type + 
-    "\n" + "Parent Station || " + parent_station +
-    "\n" + "============================================" +
-    "\n";
+		stop_desc = c;
+		stop_lat = d;
+		stop_lon = e;
+		zone_id = f;
+		stop_url = g;
+		location_type = h;
+		parent_station = i;
+	}
+
+	
+	public String outputInfo() {
+		return "Stop Code      || " + stop_code + 
+		"\n" + "Stop Name      || " + stop_name +
+
+		"\n" + "Stop Desc      || " + stop_desc +
+
+		"\n" + "Stop Latitude  || " + stop_lat +
+		"\n" + "Stop Longitude || " + stop_lon +
+		"\n" + "Zone ID        || " + zone_id +
+		"\n" + "Stop URL       || " + stop_url +
+		"\n" + "Location Type  || " + location_type +
+		"\n" + "Parent Station || " + parent_station +
+		"\n" + "============================================" +
+		"\n";
 	}
 }
