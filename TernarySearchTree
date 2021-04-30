@@ -140,7 +140,7 @@ public class TernarySearchTree {
   // object, then a StopInfo object, for each line,
   // adding them to an array
     
-  public void readStopsInfoFileIntoArray() throws FileNotFoundException {
+  public StopInfo[] readStopsInfoFileIntoArray() throws FileNotFoundException {
     String stopsAsLines[] = null;
     StopInfo stops[] = null;
     String stopName;
@@ -168,12 +168,24 @@ public class TernarySearchTree {
       stops[i].setInfo(splitLine[0], splitLine[1], splitLine[2], splitLine[3], splitLine[4], splitLine[5], splitLine[6], splitLine[7], splitLine[8]);
     }
     readStops.close();
+    return stops;
   }
   
   //creation of the trie
     public TernarySearchTree() {
-      this.size = 0;
-      this.root = null;
+        this.size = 0;
+        this.root = null;
+        StopInfo stops[] = null;
+    
+        try {
+            stops = readStopsInfoFileIntoArray();
+        } catch(Exception e) {
+			System.out.print("file not found: stops.txt");
+        }
+        
+        for (StopInfo stop : stops) {
+            this.add(stop.stop_name, stop);
+        }
     }
      
     public void add(String key, StopInfo value) {
