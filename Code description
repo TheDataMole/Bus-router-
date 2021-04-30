@@ -12,16 +12,9 @@ arrival times were parsed from stop_times.txt into an arrivalTimesFormattedArray
 a String Builder was used to remove the space charachter for the perfomance StringBuilder was used to over String[] 
 
 once an arrival time was in the array it was then checked to be valid if the arrival time was indeed valid a BusInfo object was created using the information 
-of the line i.e line[size of information] and added to the LinkedMap known as busInfo  another LinkedMap was also stored to hold the relation of arrivalTimes and trip ID
-known as arrivalTripID
+of the line i.e line[size of information] and added to the LinkedMap known as busInfo.
 
 for example the line 9017927, 5:25:00, 5:25:00,646,1,,0,0,
-
-arrivalTripID:
-HashKey (arrivalTime) | String (TripID)
------------------------------------------
-       52500          |    9017927
-       
      
 busInfo:                                                                      
 HashKey (arrivalTime) | Object (BusInfo)                                              
@@ -41,6 +34,15 @@ HashKey (arrivalTime) | Object (BusInfo)
      int dropoff_type            | 0
      double shape_dist_travelled | 0       
 	
+  
+  The linked Map allows multiple objects to be stored at the same key so if they have the same arrival time 
+  
+      busInfo:                                                                      
+HashKey (arrivalTime) | Object[] (BusInfo[])                                              
+----------------------------------------- 
+      52500          |    {busInfo1 , busInfo2, busInfo3 ....}    
+  
+  
   
   Then the custom comparator for tripID was made to allow for comparison of BusInfo objects to be compared
   if the busInfo LinkedMap did include the userInputed arrival time as the key that implied there was buses arriving at the user searched time A copy of the linked list of
