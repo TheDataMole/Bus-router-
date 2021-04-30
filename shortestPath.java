@@ -66,11 +66,9 @@ public class shortestPath {
 			
 			previousTripId = tripId;
 			tripId = currentLine.nextInt();
-			currentLine.next();
-			currentLine.next();
+			String arrivalTime = currentLine.next();
+			String departureTime = currentLine.next();
 			departureStop = arrivalStop;
-
-			
 			arrivalStop = currentLine.nextInt();
 			if(previousTripId == tripId){
 				adjMatrix[departureStop][arrivalStop] = weight;
@@ -111,22 +109,21 @@ public class shortestPath {
 		}
 		scanner.close();
 
-		findShortestPath(departureStop, arrivalStop);
+		//findShortestPath(departureStop, arrivalStop);
 		
 		
 	}
 
 	public static void main(String[] args) {
 		shortestPath map = new shortestPath("stop_times.txt", "transfers.txt");
-		
+		map.createMap();
 		try{
 			readFile("stop_times.txt", "transfers.txt");
 		} catch(FileNotFoundException e){
 			e.printStackTrace();
 		}
-		System.out.println(map.findShortestPath(646, 378));
-		System.out.println(map.findShortestPath(8467, 4711));
-		System.out.println(map.findShortestPath(9721, 5854));
+		map.findShortestPath(1477, 1394);
+		
 		
 		
 
@@ -134,20 +131,15 @@ public class shortestPath {
 	}
 
 	//using dijkstra
-	public static double findShortestPath(int departureStop, int arrivalStop){
-
+	public static void findShortestPath(int departureStop, int arrivalStop){
+		
 		int visited[] = new int[adjMatrix.length];
 		int currentStop;
 		int numStopsVisited;
 		double distance[] = new double[adjMatrix.length];
 		int edge[] = new int[adjMatrix.length];
 
-		for(int i = 0; i < distance.length; i++) {
-    		if(i != departureStop)
-    		{
-    			distance[i] = Double.POSITIVE_INFINITY;
-    		}
-    	}
+		
 
 		visited[departureStop] = 1;
 		distance[departureStop] = 0;
@@ -177,26 +169,30 @@ public class shortestPath {
 
 					currentStop = j;
 					shortestDistance = distance[j];
+					//System.out.println(shortestDistance);
 				}
 			}
 			numStopsVisited++;
 
 		}
+		
 		printRoute(departureStop, arrivalStop, distance, edge);
-		return distance[arrivalStop];
+		
 	
 
 	}
 
 	private static void printRoute(int departureStop, int arrivalStop, double [] distance, int[] edge) {
-		String route = " ";
+		String route = "---";
 		while(departureStop != arrivalStop){
 			route = "---" + edge[arrivalStop] + route;
 			arrivalStop = edge[arrivalStop];
+			//System.out.println(edge[arrivalStop]);
 
 		}
 		route = route + "---" + arrivalStop;
-		System.out.println(distance[arrivalStop] + " from " + departureStop + " to " + arrivalStop + "via" + route);
+		
+		System.out.println(distance[arrivalStop] + " from " + departureStop + " to " + arrivalStop + " via" + route);
 	}
 
 	
