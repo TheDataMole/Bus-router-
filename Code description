@@ -1,0 +1,76 @@
+Search by arrival Time 
+
+I implemented search by Arrival Time in a fairly simplistic way using a improved version of Hashmapping with the class LinkedMap Abstract Data Structure
+The LinkedMap ADS uses the idea of hashmapping and allows for objects in this case BusInfo objects to be added to the arrival time as the hashkey in a Linked List fashion 
+
+first of all the userInputed ArrivalTime was tested and prints Invalid to console if not accepted.
+then once each supplied text file is tested we can begin the functionability
+
+each line of stops_times.txt was parsed into an array to contain the information of eachline using split(",")
+tripID was also parsed into an integer from lines[0] its position within lines
+arrival times were parsed from stop_times.txt into an arrivalTimesFormattedArray using split(":") so 12:00:00 in the array was 120000 for arrivalTimes Parsed in with the length " 5:21:10"
+a String Builder was used to remove the space charachter for the perfomance StringBuilder was used to over String[] 
+
+once an arrival time was in the array it was then checked to be valid if the arrival time was indeed valid a BusInfo object was created using the information 
+of the line i.e line[size of information] and added to the LinkedMap known as busInfo  another LinkedMap was also stored to hold the relation of arrivalTimes and trip ID
+known as arrivalTripID
+
+for example the line 9017927, 5:25:00, 5:25:00,646,1,,0,0,
+
+arrivalTripID:
+HashKey (arrivalTime) | String (TripID)
+-----------------------------------------
+       52500          |    9017927
+       
+     
+busInfo:                                                                      
+HashKey (arrivalTime) | Object (BusInfo)                                              
+-----------------------------------------                                              
+       52500          |    busInfo1     
+       
+       
+     busInfo1                    |   
+    -------------------------------------------
+     int trip_id                 |  9017927
+     String arrivalTime          |   5:25:00
+     String departure            |   5:25:00
+     int stop_id                 |  646
+     int stop_sequence           | 1
+     String stop_headsign        |
+     int pickup_type             | 0 
+     int dropoff_type            | 0
+     double shape_dist_travelled | 0       
+	
+  
+  Then the custom comparator for tripID was made to allow for comparison of BusInfo objects to be compared
+  if the busInfo LinkedMap did include the userInputed arrival time as the key that implied there was buses arriving at the user searched time A copy of the linked list of
+  BusInfo objects was then copied to another array called tripIDObjectArraySorted and sorted using the custom comparator and Arrays.sort which uses a selection of mergesort quicksort
+  and insertionSort for simplicity. The custom Comparator was set up to compare objects and sort by TripID so the BusInfos were sorted by TripID
+  now that we had an array of sorted TripIDs BusInfo objects the last thing to do was add the info from stops.txt for a comprehensive look at all stop information
+  using stopID the text from stops.txt was parsed into each respected BusInfo object and once all information was added to all BusInfo objects at the arrival time the loop terminates
+  and uses the BusInfo.outputInfo() method to return all bus infos at the searched for arrival time 
+  
+  e.g of a Trip output at 5:25:00
+  
+Trip ID                  || 9017927
+Arrival Time             ||  5:25:00
+Departure Time           ||  5:25:00
+Stop ID                  || 646
+Stop Sequence            || 1
+Stop Headsign            || 
+Pickup Type              || 0
+Dropoff Type             || 0
+Shape Distance Travelled || 0.0
+Stop Code                || 50640
+Stop Name                || DUNBAR LOOP
+Stop Desc                || DUNBAR @ LOOP
+Stop Latitude            || 49.234598
+Stop Longitude           || -123.185765
+Zone ID                  || ZN 99
+Stop URL                 ||  
+Location Type            || 0
+Parent Station           || 
+
+     
+  
+      
