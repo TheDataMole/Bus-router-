@@ -24,27 +24,29 @@ public class BusInfo {
 	
 	
 	
-	public void outputInfo()
+	public String outputInfo()
 	{
-		System.out.println("Trip ID                  || " + trip_id);
-		System.out.println("Arrival Time             || " + arrival_time);
-		System.out.println("Departure Time           || " + departure_time);
-		System.out.println("Stop ID                  || " + stop_id);
-		System.out.println("Stop Sequence            || " + stop_sequence);
-		System.out.println("Stop Headsign            || " + stop_headsign);
-		System.out.println("Pickup Type              || " + pickup_type);
-		System.out.println("Dropoff Type             || " + dropoff_type);
-		System.out.println("Shape Distance Travelled || " + shape_dist_travelled);
+		String outputInfo;
+		outputInfo = "Trip ID                  || " + trip_id +"\n";
+		outputInfo = outputInfo + "Arrival Time             || " + arrival_time+ "\n";
+		outputInfo = outputInfo +"Departure Time           || " + departure_time+ "\n";
+		outputInfo = outputInfo +"Stop ID                  || " + stop_id+ "\n";
+		outputInfo = outputInfo +"Stop Sequence            || " + stop_sequence+ "\n";
+		outputInfo = outputInfo +"Stop Headsign            || " + stop_headsign+ "\n";
+		outputInfo = outputInfo +"Pickup Type              || " + pickup_type+ "\n";
+		outputInfo = outputInfo +"Dropoff Type             || " + dropoff_type+ "\n";
+		outputInfo = outputInfo +"Shape Distance Travelled || " + shape_dist_travelled+ "\n";
 		
-		System.out.println("Stop Code                || " + stop_code);
-		System.out.println("Stop Name                || " + stop_name);
-		System.out.println("Stop Desc                || " + stop_desc);
-		System.out.println("Stop Latitude            || " + stop_lat);
-		System.out.println("Stop Longitude           || " + stop_lon);
-		System.out.println("Zone ID                  || " + zone_id);
-		System.out.println("Stop URL                 || " + stop_url);
-		System.out.println("Location Type            || " + location_type);
-		System.out.println("Parent Station           || " + parent_station+ "\n");
+		outputInfo = outputInfo +"Stop Code                || " + stop_code+ "\n";
+		outputInfo = outputInfo +"Stop Name                || " + stop_name+ "\n";
+		outputInfo = outputInfo +"Stop Desc                || " + stop_desc+ "\n";
+		outputInfo = outputInfo +"Stop Latitude            || " + stop_lat+ "\n";
+		outputInfo = outputInfo +"Stop Longitude           || " + stop_lon+ "\n";
+		outputInfo = outputInfo +"Zone ID                  || " + zone_id+ "\n";
+		outputInfo = outputInfo +"Stop URL                 || " + stop_url+ "\n";
+		outputInfo = outputInfo +"Location Type            || " + location_type+ "\n";
+		outputInfo = outputInfo +"Parent Station           || " + parent_station+ "\n"+ "\n";
+		return outputInfo;
 	}
 	
 	public Integer getTrip_ID()
@@ -52,3 +54,4 @@ public class BusInfo {
 		return this.trip_id;
 	}
 }
+
