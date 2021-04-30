@@ -54,3 +54,4 @@ public class BusInfo {
 		return this.trip_id;
 	}
 }
+
