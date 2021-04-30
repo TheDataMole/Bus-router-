@@ -10,7 +10,11 @@ public class BusRouter{
 	File stopsFile;
 
 	
-	String searchByArrivalTime(String hhmmss) throws FileNotFoundException
+	
+	searchStopInformationByName(String userInput)
+	ShortestPathAlgorithm(String Stop1, String stop2)
+  
+  String searchByArrivalTime(String hhmmss) throws FileNotFoundException
 	{ 
 		
 		String[] inputTime = hhmmss.split(":");

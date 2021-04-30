@@ -1,1 +1,6 @@
 
+searchByarrivalTime finished 24/04/21
+ShotestPath in progress 28/04/21
+TST computer crash trying to recover 28/04/21
+JPanel interface complications on enviroment 28/04/21
+JPanel interface complications solved 29/04/21
