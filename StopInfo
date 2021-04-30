@@ -1,5 +1,6 @@
 public class StopInfo {
 
+	public String stop_id;
 	public String stop_code;
 	public String stop_name;
 
@@ -19,24 +20,25 @@ public class StopInfo {
 	
  
 	
-	public void setInfo(String a, String b, String c, String d, String e, String f, String g, String h, String i) {
+	public void setInfo(String a, String b, String c, String d, String e, String f, String g, String h, String i, String j) {
+        stop_id = a;
+		stop_code = b;
    
-		stop_code = a;
-   
-		stop_name = b;
+		stop_name = c;
 
-		stop_desc = c;
-		stop_lat = d;
-		stop_lon = e;
-		zone_id = f;
-		stop_url = g;
-		location_type = h;
-		parent_station = i;
+		stop_desc = d;
+		stop_lat = e;
+		stop_lon = f;
+		zone_id = g;
+		stop_url = h;
+		location_type = i;
+		parent_station = j;
 	}
 
 	
 	public String outputInfo() {
-		return "Stop Code      || " + stop_code + 
+		return "Stop ID        || " + stop_id + 
+		"\n" + "Stop Code      || " + stop_code + 
 		"\n" + "Stop Name      || " + stop_name +
 
 		"\n" + "Stop Desc      || " + stop_desc +
