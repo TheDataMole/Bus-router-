@@ -89,9 +89,9 @@ public class TernarySearchTree {
 					return right.search(key);
 				}
 			}
-	}
+	    }
 		
-	public Node search(String key) {
+    	public Node search(String key) {
 		if (key.isEmpty()) return null;
 			Character c = key.charAt(0);
 		if (c.equals(this.character)) {
@@ -104,12 +104,9 @@ public class TernarySearchTree {
       		} else {
         		if (right == null) return null;
         		else return right.search(key);
-      }
-      
-      public boolean containsStop() {
-      	return this.constainsStop;
-      }
-   }
+            }
+	    }
+	}
 
     //Use this one for finding stops with just the start
     //of words
@@ -124,8 +121,8 @@ public class TernarySearchTree {
     private Node searchToEndOfKey(Node node, String key, int ptr) {
       Character c = key.charAt(0);
       if (node == null) return null;
-      if (c.equals(this.character)) return searchToEndOfKey(node.left, key, ptr);
-      else if (c.compareTo(this.character) < 0) return searchToEndOfKey(node.right, key, ptr);
+      if (c.equals(node.character)) return searchToEndOfKey(node.left, key, ptr);
+      else if (c.compareTo(node.character) < 0) return searchToEndOfKey(node.right, key, ptr);
       else {
         if (ptr == key.length() - 1) return node;
         else return searchToEndOfKey(node.mid, key, ptr + 1);
@@ -135,7 +132,7 @@ public class TernarySearchTree {
     private String returnListOfStops(Node node, String string, StringBuilder sb, String key) {
       if (node != null) {
         returnListOfStops(node.left, string, sb, key);
-        string = string + node.outputInfo;
+        string = string + node.value.outputInfo();
         if (node.containsStop) sb.append(key + string.substring(1) + "\n");
         returnListOfStops(node.mid, string, sb, key);
         string = string.substring(0, string.length() - 1);
@@ -161,12 +158,12 @@ public class TernarySearchTree {
       count++;
     }
     for (int i = 0; i < stopsAsLines.length; i++) {
-      String splitLine[] = stopsAsLines[i].split("," -1);
+      String splitLine[] = stopsAsLines[i].split(",", -1);
       //this next bit checks if the first word of the stop name is one of a few, and moves it to the end if need be
       stopName = splitLine[1];
-      stopFirstWord = splitStopName[0];
       String splitStopName[] = stopName.split(" ", -1);
-      if (stopFirstWord[0].equals("FLAGSTOP") || (stopFirstWord[0].equals("WB") || (stopFirstWord[0].equals("NB") || (stopFirstWord[0].equals("SB") || (stopFirstWord[0].equals("EB")) {
+      stopFirstWord = splitStopName[0];
+      if ((stopFirstWord.equals("FLAGSTOP")) || (stopFirstWord.equals("WB")) || (stopFirstWord.equals("NB")) || (stopFirstWord.equals("SB")) || (stopFirstWord.equals("EB"))) {
         int wordIndex = stopName.indexOf(" ") + 1;
         String newName = stopName.substring(wordIndex);
         splitLine[1] = newName + " " + stopFirstWord;
@@ -176,8 +173,4 @@ public class TernarySearchTree {
     }
     readStops.close();
   }
- }
 }
-
-
-
