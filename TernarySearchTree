@@ -129,7 +129,7 @@ public class TernarySearchTree {
       }
     }
 
-    private String returnListOfStops(Node node, String string, StringBuilder sb, String key) {
+    private void returnListOfStops(Node node, String string, StringBuilder sb, String key) {
       if (node != null) {
         returnListOfStops(node.left, string, sb, key);
         string = string + node.value.outputInfo();
@@ -144,9 +144,9 @@ public class TernarySearchTree {
   // object, then a StopInfo object, for each line,
   // adding them to an array
     
-  public StopInfo[] readStopsInfoFileIntoArray() {
-    String stopsAsLines[];
-    StopInfo stops[];
+  public void readStopsInfoFileIntoArray() throws FileNotFoundException {
+    String stopsAsLines[] = null;
+    StopInfo stops[] = null;
     String stopName;
     String stopFirstWord;
 
