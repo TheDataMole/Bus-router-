@@ -11,7 +11,7 @@ public class shortestPath {
 	String stopTimes;
 	String transfers;
 
-	shortestPath(String stopTimes, String transfers){
+	public shortestPath(String stopTimes, String transfers){
 		
 		try {
 			readFile(stopTimes, transfers);
@@ -25,7 +25,7 @@ public class shortestPath {
 
 	}
 
-	private void createMap()  {
+	public void createMap()  {
 		for(int i = 0 ; i < adjMatrix.length; i ++){
 			for(int j = 0; j < adjMatrix[i].length; j++){
 				if(i == j){
@@ -131,7 +131,7 @@ public class shortestPath {
 	}
 
 	//using dijkstra
-	public static void findShortestPath(int departureStop, int arrivalStop){
+	public void findShortestPath(int departureStop, int arrivalStop){
 		
 		int visited[] = new int[adjMatrix.length];
 		int currentStop;
@@ -205,4 +205,3 @@ public class shortestPath {
 		}
 	}
 }
-
