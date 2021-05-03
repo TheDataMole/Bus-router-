@@ -165,7 +165,7 @@ public class BusRoutes extends JFrame{
 				//check if time is in hh:mm:ss	
 				
 				
-				if (time=="") {
+				if (time!="") {
 					BusRouter bus = new BusRouter();
 					try {
 						routes = bus.searchByArrivalTime(time);
