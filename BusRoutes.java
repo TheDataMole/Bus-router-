@@ -67,7 +67,7 @@ public class BusRoutes extends JFrame{
 						pathA.setText("Please enter the Stops' IDs");
 					}
 				
-					//paths = shortestPath(start, end);
+					paths = shortestPath(start, end);
 					pathLabel.setText(paths);
 					pathPanel.add(pathLabel);
 					frame.setVisible(false);
@@ -117,8 +117,8 @@ public class BusRoutes extends JFrame{
 				}
 				else {
 				
-				//TernarySearchTree tree = new TernarySearchTree();
-				//stops = tree.searchStops(name);
+				TernarySearchTree tree = new TernarySearchTree();
+				stops = tree.searchStops(name);
 				
 				stopLabel.setText(stops);
 				stopPanel.add(stopLabel);
