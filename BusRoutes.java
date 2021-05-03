@@ -56,6 +56,7 @@ public class BusRoutes extends JFrame{
 				String start = pathFStart.getText();
 				String end = pathFEnd.getText();
 				String paths = "Error??";
+				BusRouter x = new BusRouter();
 				int startID;
 				int endID;
 				JLabel pathLabel = new JLabel(paths);
@@ -69,7 +70,7 @@ public class BusRoutes extends JFrame{
 						pathA.setText("Please enter the Stops' IDs");
 					}
 				
-					paths = shortestPath(startID, endID);
+					paths = x.shortestPath(startID, endID);
 					pathLabel.setText(paths);
 					pathPanel.add(pathLabel);
 					frame.setVisible(false);
