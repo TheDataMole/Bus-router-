@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.StringBuilder;
 
-public static class TernarySearchTree {
+public class TernarySearchTree {
 
         public int size;
         public Node root;
@@ -134,7 +134,7 @@ public static class TernarySearchTree {
                 if (node.containsStop)
                     sb.append(key + string.substring(1) + "\n");
                 returnListOfStops(node.mid, string, sb, key);
-                string = string.substring(0, string.length() - 1);
+                string = string.substring(0, string.length() -1);
                 returnListOfStops(node.right, string, sb, key);
             }
         }
@@ -222,59 +222,5 @@ public static class TernarySearchTree {
 
         public String search(String key) {
             return searchStops(key.toUpperCase());
-        }
-    }
-
-    public static class StopInfo {
-
-        public String stop_id;
-        public String stop_code;
-        public String stop_name;
-
-        public String stop_desc;
-
-        public String stop_lat;
-
-        public String stop_lon;
-
-        public String zone_id;
-
-        public String stop_url;
-
-        public String location_type;
-
-        public String parent_station;
-
-
-
-        public StopInfo(String a, String b, String c, String d, String e,
-            String f, String g, String h, String i, String j) {
-            stop_id = a;
-            stop_code = b;
-
-            stop_name = c;
-
-            stop_desc = d;
-            stop_lat = e;
-            stop_lon = f;
-            zone_id = g;
-            stop_url = h;
-            location_type = i;
-            parent_station = j;
-        }
-
-
-        public String outputInfo() {
-            return "Stop ID        || " + stop_id +
-                "\n" + "Stop Code      || " + stop_code +
-                "\n" + "Stop Name      || " + stop_name +
-                "\n" + "Stop Desc      || " + stop_desc +
-                "\n" + "Stop Latitude  || " + stop_lat +
-                "\n" + "Stop Longitude || " + stop_lon +
-                "\n" + "Zone ID        || " + zone_id +
-                "\n" + "Stop URL       || " + stop_url +
-                "\n" + "Location Type  || " + location_type +
-                "\n" + "Parent Station || " + parent_station +
-                "\n" + "============================================" + "\n";
         }
     }
