@@ -114,7 +114,7 @@ public class BusRouter{
 		}
 		
 		Comparator<BusInfo> customComparator = new myCustomTripIDComparator();
-		BusInfo[] tripIDObjectArraySorted = null;
+		BusInfo[] tripIDObjectArraySorted = new BusInfo[0];
 		if(busInfo.containsKey(inputTimeSearch))
 		{	
 			tripIDObjectArraySorted = Arrays.copyOf(busInfo.valuesToArray(inputTimeSearch), busInfo.valuesToArray(inputTimeSearch).length, BusInfo[].class);
