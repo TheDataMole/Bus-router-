@@ -107,20 +107,20 @@ public class BusRoutes extends JFrame{
 		});
 			
 		
-		stopB.addActionListener(new ActionListener() {
+	stopB.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String name = stopF.getText();
 				String stops = "Error??";
 				JLabel stopLabel = new JLabel(stops);
+				BusRouter x = new BusRouter();
 				if(name==null) {
 					stopA.setText("Please enter a stop name above");
 				}
 				else {
 				
-				TernarySearchTree tree = new TernarySearchTree();
-				stops = tree.searchStops(name);
+				stops = x.TST.search(name);
 				
 				stopLabel.setText(stops);
 				stopPanel.add(stopLabel);
