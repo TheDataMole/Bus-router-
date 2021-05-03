@@ -1,0 +1,7 @@
+The JFrame class is used to display a graphical user interface.
+This class creates a pop-up window with options to exit, enlarge, or minimise.
+
+A JPanel is used to contain the elements of the interface.
+Each feature has 2 JLabels, one that displays text explaining which feature the elements under it pertain to, and one explaining what input to put in the text fields and showing any errors arising from incorrect inputs.
+Each feature has a number of inputs that are entered into a set of text fields implemented with JTextField.
+For each feature there is a JButtons that when pressed takes in the inputs in the associated text fields, checks for errors, calls the feature, and creates a new JPanel with the output from the feature and a JButton that brings the user back to the previous JPanel.
