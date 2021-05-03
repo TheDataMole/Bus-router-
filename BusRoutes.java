@@ -56,18 +56,20 @@ public class BusRoutes extends JFrame{
 				String start = pathFStart.getText();
 				String end = pathFEnd.getText();
 				String paths = "Error??";
+				int startID;
+				int endID;
 				JLabel pathLabel = new JLabel(paths);
 				
 				if(start != null && end != null) {
 					try {
-						Integer.parseInt(start);
-						Integer.parseInt(end);
+						startID = Integer.parseInt(start);
+						endID = Integer.parseInt(end);
 					}
 					catch (NumberFormatException nfe){
 						pathA.setText("Please enter the Stops' IDs");
 					}
 				
-					paths = shortestPath(start, end);
+					paths = shortestPath(startID, endID);
 					pathLabel.setText(paths);
 					pathPanel.add(pathLabel);
 					frame.setVisible(false);
