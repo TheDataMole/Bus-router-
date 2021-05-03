@@ -111,7 +111,7 @@ public class TernarySearchTree {
         }
 
         private Node searchToEndOfKey(Node node, String key, int ptr) {
-            Character c = key.charAt(0);
+            Character c = key.charAt(ptr);
             if (node == null)
                 return null;
             if (c.equals(node.character))
