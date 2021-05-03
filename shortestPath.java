@@ -131,8 +131,8 @@ public class shortestPath {
 	}
 
 	//using dijkstra
-	public void findShortestPath(int departureStop, int arrivalStop){
-		
+	public String findShortestPath(int departureStop, int arrivalStop){
+		String route;
 		int visited[] = new int[adjMatrix.length];
 		int currentStop;
 		int numStopsVisited;
@@ -176,13 +176,14 @@ public class shortestPath {
 
 		}
 		
-		printRoute(departureStop, arrivalStop, distance, edge);
+		route = returnRoute(departureStop, arrivalStop, distance, edge);
+		return route;
 		
 	
 
 	}
 
-	private static void printRoute(int departureStop, int arrivalStop, double [] distance, int[] edge) {
+	private static String returnRoute(int departureStop, int arrivalStop, double [] distance, int[] edge) {
 		String route = "---";
 		while(departureStop != arrivalStop){
 			route = "---" + edge[arrivalStop] + route;
@@ -192,7 +193,8 @@ public class shortestPath {
 		}
 		route = route + "---" + arrivalStop;
 		
-		System.out.println(distance[arrivalStop] + " from " + departureStop + " to " + arrivalStop + " via" + route);
+		route = distance[arrivalStop] + " from " + departureStop + " to " + arrivalStop + " via" + route;
+		return route;
 	}
 
 	
