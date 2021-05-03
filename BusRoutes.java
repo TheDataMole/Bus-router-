@@ -17,7 +17,9 @@ public class BusRoutes extends JFrame{
 	static JTextField pathFStart, pathFEnd, stopF, routeF;
 
 	public static void main(String[] args) {
-		frame = new JFrame("Bus Routes");
+		if(frame == null) {
+			frame = new JFrame("Bus Routes");
+		}
 		JPanel p = new JPanel();
 		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 		
