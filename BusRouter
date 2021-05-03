@@ -8,13 +8,22 @@ public class BusRouter{
 	
 	File stopTimesFile;
 	File stopsFile;
+	TernarySearchTree TST;
+	
+
+	BusRouter()
+	{
+		TSTInitialization();
+	}
+	
+	
+	void TSTInitialization()
+	{
+		this.TST =  new TernarySearchTree();
+	}
 
 	
-	
-	searchStopInformationByName(String userInput)
-	ShortestPathAlgorithm(String Stop1, String stop2)
-  
-  String searchByArrivalTime(String hhmmss) throws FileNotFoundException
+	String searchByArrivalTime(String hhmmss) throws FileNotFoundException
 	{ 
 		
 		String[] inputTime = hhmmss.split(":");
