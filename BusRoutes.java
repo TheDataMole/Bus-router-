@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.*;
 
@@ -16,7 +17,9 @@ public class BusRoutes extends JFrame{
 	static JTextField pathFStart, pathFEnd, stopF, routeF;
 
 	public static void main(String[] args) {
-		frame = new JFrame("Bus Routes");
+		if(frame == null) {
+			frame = new JFrame("Bus Routes");
+		}
 		JPanel p = new JPanel();
 		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 		
@@ -46,7 +49,7 @@ public class BusRoutes extends JFrame{
 		
 		pathPanel.add(pathExit);
 		
-		routeB.addActionListener(new ActionListener() {
+		pathB.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -113,7 +116,9 @@ public class BusRoutes extends JFrame{
 					stopA.setText("Please enter a stop name above");
 				}
 				else {
-				stops = searchStops(name);
+				
+				TernarySearchTree tree = new TernarySearchTree();
+				stops = tree.searchStops(name);
 				
 				stopLabel.setText(stops);
 				stopPanel.add(stopLabel);
@@ -157,13 +162,22 @@ public class BusRoutes extends JFrame{
 				String routes = "Error??";
 				JLabel routeLabel = new JLabel(routes);
 				
-				//check if time is in hh:mm:ss		
-				routes = searchByArrivalTime(time);
-				if (time!=null) {
+				//check if time is in hh:mm:ss	
+				
+				
+				if (time!="") {
+					BusRouter bus = new BusRouter();
+					try {
+						routes = bus.searchByArrivalTime(time);
+					} catch (FileNotFoundException e1) {
+						routes = "File not found";
+					}
+					
 					if (routes=="Invalid input") {
 						routeA.setText("Please enter a time in HH:MM:SS format");
 					}
 					else {
+						
 						routeLabel.setText(routes);
 						routePanel.add(routeLabel);
 						routePanel.add(routeExit);
