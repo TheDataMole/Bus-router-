@@ -22,11 +22,11 @@ public class BusRouter{
 		this.TST =  new TernarySearchTree();
 	}
 	
-	void shortestPath(int stop, int stop2)
+	String shortestPath(int stop, int stop2)
 	{
 		this.SP = new shortestPath("stop_times.txt", "transfers.txt");
 		SP.createMap();
-		SP.findShortestPath(stop, stop2);
+		return SP.findShortestPath(stop, stop2);
 	}
 	
 	
